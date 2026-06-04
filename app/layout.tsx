@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Fraunces, JetBrains_Mono } from "next/font/google";
+import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/components/providers/LenisProvider";
 import AnimationInit from "@/components/providers/AnimationInit";
@@ -18,10 +18,13 @@ const inter = Inter({
   display: "swap",
 });
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+// Instrument Serif — high-contrast serif with characterful italic, closer to
+// LEA Winery's actual italic-stress font than Fraunces. Used exclusively for
+// stress words inside otherwise-sans headlines via the .stress class.
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["400"],
   style: ["normal", "italic"],
   display: "swap",
 });
@@ -62,7 +65,7 @@ export default function RootLayout({
   return (
     <html
       lang={brand.identity.locale}
-      className={`${inter.variable} ${fraunces.variable} ${jetbrainsMono.variable}`}
+      className={`${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
     >
       <body className="antialiased">
         {/* Global SVG noise filter — referenced by all .noise elements */}

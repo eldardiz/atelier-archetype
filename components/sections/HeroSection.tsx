@@ -1,41 +1,31 @@
 import Image from 'next/image'
 
-// LEA Winery hero pattern:
-// - Full-bleed background photo (later: HTML5 video)
-// - Small eyebrow letter-spaced label at the top
-// - Multi-line italic-stress mission statement as the dominant element,
-//   centered horizontally and toward the lower-middle of the viewport
-// - No CTA button, no scroll cue, no corner stamps
-// Stress words (rispetto / dedizione / curiosità / spirito pionieristico in LEA)
-// swap to Fraunces italic via the .stress class defined in claude-design.css.
+// LEA Winery hero — exact pattern from screenshot:
+// - Full-bleed vineyard photo
+// - NO eyebrow label at the top
+// - 5-line italic-stress mission paragraph, centered horizontally, anchored
+//   to the lower-middle of the viewport (above the cookie banner area)
+// - Italic-stress words appear MULTIPLE per line, swapping mid-sentence
+//   between the sans body and the serif italic
+// - All white text on the photo, no overlay veil that darkens the photo
+//   beyond a very subtle bottom gradient
 
 const HERO_IMG = '/images/hero/placeholder.jpg'
-const HERO_EYEBROW = 'Innovative to be natural'
-const HERO_LINES: Array<Array<{ text: string; stress?: boolean }>> = [
-  [
-    { text: 'We look at the land' },
-  ],
-  [
-    { text: 'with infinite ' },
-    { text: 'rispetto', stress: true },
-    { text: ',' },
-  ],
-  [
-    { text: 'with daily ' },
-    { text: 'dedizione', stress: true },
-    { text: ',' },
-  ],
-  [
-    { text: 'and a ' },
-    { text: 'spirito pionieristico', stress: true },
-    { text: '.' },
-  ],
+
+// Each line is an array of tokens. token.stress = true wraps in <span class="stress">
+// which swaps from Inter to Instrument Serif italic via the .stress class.
+const MISSION: Array<Array<{ text: string; stress?: boolean }>> = [
+  [{ text: 'We look at the land with infinite ' }, { text: 'respect', stress: true }, { text: ',' }],
+  [{ text: 'we work the vineyards with stubborn ' }, { text: 'dedication', stress: true }, { text: ',' }],
+  [{ text: 'we meet change with a ' }, { text: 'pioneering spirit', stress: true }, { text: ',' }],
+  [{ text: 'we taste each season with unrelenting ' }, { text: 'curiosity', stress: true }, { text: ',' }],
+  [{ text: 'never tamed.' }],
 ]
 
 export default function HeroSection() {
   return (
-    <section className="atelier-hero" id="hero">
-      <div className="atelier-hero__bg" aria-hidden="true">
+    <section className="lea-hero" id="hero">
+      <div className="lea-hero__bg" aria-hidden="true">
         <Image
           src={HERO_IMG}
           alt=""
@@ -44,17 +34,18 @@ export default function HeroSection() {
           sizes="100vw"
           className="object-cover"
         />
-        <div className="atelier-hero__veil" />
+        <div className="lea-hero__veil" />
       </div>
 
-      <div className="atelier-hero__content">
-        <p className="atelier-hero__eyebrow">{HERO_EYEBROW}</p>
-        <p className="atelier-hero__mission">
-          {HERO_LINES.map((line, i) => (
-            <span key={i} className="atelier-hero__line">
+      <div className="lea-hero__content">
+        <p className="lea-hero__mission">
+          {MISSION.map((line, i) => (
+            <span key={i} className="lea-hero__line">
               {line.map((token, j) =>
                 token.stress ? (
-                  <span key={j} className="stress">{token.text}</span>
+                  <span key={j} className="stress">
+                    {token.text}
+                  </span>
                 ) : (
                   <span key={j}>{token.text}</span>
                 ),

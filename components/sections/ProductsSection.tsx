@@ -1,100 +1,86 @@
+// LEA "I Vini" — slices 12 + 13:
+// 1. Small "I VINI" eyebrow centered
+// 2. Big centered italic-stress display headline (intro line)
+// 3. HUGE horizontal-scrolling marquee with the brand names in serif italic,
+//    repeating: "FRANC LIZÊR  FRANC LIZÊR  BLANCJAT  BLANCJAT  …"
+//    Roughly 120-180px tall display text scrolling continuously.
+// 4. Below: STACKED wine rows. Each row is its own block:
+//    - Small "VINI ITALIANI DEALCOLATI" tag (mono uppercase)
+//    - Big serif italic headline (the wine name)
+//    - Short description below
+//    - A floating transparent-PNG bottle on the right
+// NOT two cards side-by-side (that was my v2 misread).
+//
+// For the productized template, the wine lines come from a const array so
+// per-lead leads can rename to "Bread Counter / Sweets" or "Tasting Menu /
+// Cellar" etc.
+
 import Image from 'next/image'
 
-// LEA "I Vini" pattern:
-// - Two big product cards side-by-side (NOT a horizontal scroller — that was my
-//   earlier wrong assumption). On mobile they stack.
-// - Each card: full-bleed background photo of the vineyard/category
-//   + category tag (small caps, top-left)
-//   + headline (italic-stress hook)
-//   + floating PNG product bottle on the right (transparent background)
-//   + CTA link bottom-left
-// - The two cards differ in palette intent: one warmer, one cooler — but for
-//   the template default they're both the same paper-on-photo treatment.
-//
-// Business-agnostic: for restaurants this becomes "Seasonal Menu" + "Tasting
-// Room"; for bakeries "Bread Counter" + "Sweets"; for wineries it stays "Wines".
-
-type ProductCard = {
+type WineLine = {
   id: string
   tag: string
-  headline: { lead: string; stress: string; tail?: string }
-  bgImg: string
-  bottleImg?: string
-  ctaLabel: string
-  ctaHref: string
+  name: string
+  description: string
+  bottleSrc?: string
 }
 
-const CARDS: ProductCard[] = [
+const LINES: WineLine[] = [
   {
     id: 'first',
-    tag: 'Cellar selection',
-    headline: {
-      lead: 'A glass shared with ',
-      stress: 'liberty',
-      tail: ', without compromise.',
-    },
-    bgImg: '/images/featured/card-01.jpg',
-    bottleImg: '/images/showcase/panel-01.png',
-    ctaLabel: 'See the cellar',
-    ctaHref: '#contact',
+    tag: 'Vini italiani dealcolati',
+    name: 'Franc Lizêr',
+    description:
+      'A glass of wine shared in liberty, without compromise. The pleasure of a true Italian wine, dealcoholized.',
+    bottleSrc: '/images/showcase/panel-01.png',
   },
   {
     id: 'second',
-    tag: 'Estate range',
-    headline: {
-      lead: 'Bottles that tell the story of a ',
-      stress: 'terra',
-      tail: ' and its people.',
-    },
-    bgImg: '/images/featured/card-02.jpg',
-    bottleImg: '/images/showcase/panel-02.png',
-    ctaLabel: 'See the estate range',
-    ctaHref: '#contact',
+    tag: 'Vini biologici e naturali',
+    name: 'Blancjat',
+    description:
+      'Bottles that tell the story of a land and the people who tend it. Certified organic, naturally vinified.',
+    bottleSrc: '/images/showcase/panel-02.png',
   },
 ]
 
 export default function ProductsSection() {
+  // Marquee content — each brand name repeated several times so the loop
+  // reads as a single continuous string.
+  const marqueeNames = LINES.flatMap((l) => Array(4).fill(l.name)).join('  ')
+
   return (
-    <section className="atelier-products" id="products">
-      <header className="atelier-products__head">
-        <p className="atelier-products__eyebrow">I vini</p>
-        <h2 className="atelier-products__headline">
-          Two lines, one <span className="stress">philosophy</span>.
+    <section className="lea-products" id="products">
+      <div className="lea-text-block lea-text-block--in-products">
+        <p className="lea-text-block__eyebrow">I vini</p>
+        <h2 className="lea-text-block__headline">
+          Two souls, one <span className="stress">vision</span>: Blancjat and Franc Lizêr,{' '}
+          each telling a <span className="stress">story</span> of its own.
         </h2>
-      </header>
+      </div>
 
-      <div className="atelier-products__grid">
-        {CARDS.map((card) => (
-          <article key={card.id} className="atelier-product-card">
-            <div className="atelier-product-card__bg" aria-hidden="true">
-              <Image
-                src={card.bgImg}
-                alt=""
-                fill
-                sizes="(max-width: 900px) 100vw, 50vw"
-                className="object-cover"
-              />
-              <div className="atelier-product-card__veil" />
-            </div>
+      <div className="lea-marquee" aria-hidden="true">
+        <div className="lea-marquee__track">
+          <span>{marqueeNames}&nbsp;&nbsp;</span>
+          <span>{marqueeNames}&nbsp;&nbsp;</span>
+        </div>
+      </div>
 
-            <div className="atelier-product-card__inner">
-              <p className="atelier-product-card__tag">{card.tag}</p>
-
-              <h3 className="atelier-product-card__headline">
-                {card.headline.lead}
-                <span className="stress">{card.headline.stress}</span>
-                {card.headline.tail ?? ''}
-              </h3>
-
-              <a href={card.ctaHref} className="atelier-product-card__cta">
-                {card.ctaLabel} <span aria-hidden="true">→</span>
+      <div className="lea-wines">
+        {LINES.map((line) => (
+          <article key={line.id} className="lea-wine">
+            <div className="lea-wine__text">
+              <p className="lea-wine__tag">{line.tag}</p>
+              <h3 className="lea-wine__name">{line.name}</h3>
+              <p className="lea-wine__desc">{line.description}</p>
+              <a href="#contact" className="lea-text-block__cta">
+                Scopri
               </a>
             </div>
-
-            {card.bottleImg ? (
-              <div className="atelier-product-card__bottle" aria-hidden="true">
+            {line.bottleSrc ? (
+              <div className="lea-wine__bottle" aria-hidden="true">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={card.bottleImg} alt="" />
+                <img src={line.bottleSrc} alt="" />
               </div>
             ) : null}
           </article>

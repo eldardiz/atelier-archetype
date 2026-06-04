@@ -1,55 +1,21 @@
-import Image from 'next/image'
-
-// LEA "Chi siamo" pattern:
-// - Two-column split: left = eyebrow + display headline + body + "Scopri" link
-// - Right = single large supporting photo
-// - Left-aligned text, no centered display
-// - Stress words swap to Fraunces italic via .stress
-//
-// Editorial's AboutSection was a 2-col grid with a slightly different rhythm
-// and a histoire-meta block at the bottom. This is closer to LEA's quieter
-// proportions: more whitespace, no meta block, single CTA link.
-
-const ABOUT_IMG = '/images/about/placeholder.jpg'
-
-const ABOUT_EYEBROW = 'Chi siamo'
-
-// Each body item is either a plain string or an array of tokens with optional
-// stress flags. The stress flag swaps to Fraunces italic via .stress class.
-const ABOUT_BODY = [
-  'A project born in the heart of the land, between vines and stone, where a family vision shapes every bottle.',
-  'We blend the discipline of agriculture with the boldness of experimentation, always with care.',
-] as const
+// LEA "Chi siamo" — slice 02:
+// - Paper cream bg
+// - Tiny "CHI SIAMO" eyebrow centered at top, in mono-feel uppercase
+// - Big italic-stress display headline centered, fills 60% of viewport width
+//   with stress words swapping between sans body and Instrument Serif italic
+// - NO photo in this section — photo is the SEPARATE next section (PhotoBreak)
+// - NO body paragraph below the headline. The headline IS the section.
+// - NO CTA button. The whole thing reads as a single typographic statement.
 
 export default function AboutSection() {
   return (
-    <section className="atelier-about" id="about">
-      <div className="atelier-about__inner">
-        <div className="atelier-about__text">
-          <p className="atelier-about__eyebrow">{ABOUT_EYEBROW}</p>
-          <h2 className="atelier-about__headline">
-            A project born in the <span className="stress">heart</span> of the land.
-          </h2>
-          <div className="atelier-about__body">
-            {ABOUT_BODY.map((para, i) => (
-              <p key={i}>{para}</p>
-            ))}
-          </div>
-          <a href="#estate" className="atelier-about__cta">
-            Discover <span aria-hidden="true">→</span>
-          </a>
-        </div>
-
-        <div className="atelier-about__photo">
-          <Image
-            src={ABOUT_IMG}
-            alt=""
-            fill
-            sizes="(max-width: 900px) 100vw, 50vw"
-            className="object-cover"
-          />
-        </div>
-      </div>
+    <section className="lea-text-block" id="about">
+      <p className="lea-text-block__eyebrow">Chi siamo</p>
+      <h2 className="lea-text-block__headline">
+        A project born in the <span className="stress">heart</span> of the land, where{' '}
+        <span className="stress">tradition</span> and{' '}
+        <span className="stress">vision</span> share a single table.
+      </h2>
     </section>
   )
 }
