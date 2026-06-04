@@ -1,60 +1,67 @@
 import Image from 'next/image'
-import { brand } from '@/lib/brand'
+
+// LEA Winery hero pattern:
+// - Full-bleed background photo (later: HTML5 video)
+// - Small eyebrow letter-spaced label at the top
+// - Multi-line italic-stress mission statement as the dominant element,
+//   centered horizontally and toward the lower-middle of the viewport
+// - No CTA button, no scroll cue, no corner stamps
+// Stress words (rispetto / dedizione / curiosità / spirito pionieristico in LEA)
+// swap to Fraunces italic via the .stress class defined in claude-design.css.
+
+const HERO_IMG = '/images/hero/placeholder.jpg'
+const HERO_EYEBROW = 'Innovative to be natural'
+const HERO_LINES: Array<Array<{ text: string; stress?: boolean }>> = [
+  [
+    { text: 'We look at the land' },
+  ],
+  [
+    { text: 'with infinite ' },
+    { text: 'rispetto', stress: true },
+    { text: ',' },
+  ],
+  [
+    { text: 'with daily ' },
+    { text: 'dedizione', stress: true },
+    { text: ',' },
+  ],
+  [
+    { text: 'and a ' },
+    { text: 'spirito pionieristico', stress: true },
+    { text: '.' },
+  ],
+]
 
 export default function HeroSection() {
-  const eyebrow = 'a place worth knowing…'
-  const heading: string | undefined = undefined
-  const discoverLabel = 'Scroll'
-  const businessName: string = brand.identity.name
-  const address: string = brand.contact.address
-  const hoursFull: string = brand.hours.full
-  const established: string = brand.identity.established
-  const { lat, lng } = brand.identity.coordinates
-  const cityShort: string = brand.contact.cityShort
-  const imgSrc = '/images/hero/placeholder.jpg'
-
   return (
-    <section className="hero">
-      <div className="hero-inner">
-        <div className="hero-image" data-parallax-trigger>
-          <div data-parallax="0.18" style={{ position: 'absolute', inset: 0 }}>
-            <Image src={imgSrc} alt={`${businessName} — hero image`} fill className="object-cover" priority sizes="100vw" />
-          </div>
-          <div style={{ position: 'absolute', inset: 0, background: 'rgba(10,9,7,0.45)', zIndex: 1 }} />
-        </div>
-        <svg className="noise" preserveAspectRatio="none">
-          <rect width="100%" height="100%" filter="url(#noise)" />
-        </svg>
-        <div className="hero-content">
-          <div className="hero-top">
-            <div className="stack">
-              {established ? <span>EST. {established}</span> : null}
-              {lat ? <span>{lat}</span> : null}
-              {lng ? <span>{lng}</span> : null}
-            </div>
-            <div className="stack right">
-              {address ? <span>{address.split(',')[0].toUpperCase()}</span> : null}
-              {cityShort ? <span>{cityShort}</span> : null}
-            </div>
-          </div>
+    <section className="atelier-hero" id="hero">
+      <div className="atelier-hero__bg" aria-hidden="true">
+        <Image
+          src={HERO_IMG}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="atelier-hero__veil" />
+      </div>
 
-          <div className="hero-headline">
-            <div className="above">{eyebrow}</div>
-            <h1 className="display">
-              {heading ?? businessName}
-            </h1>
-          </div>
-
-          <div className="hero-bottom">
-            <div className="stack">
-              {hoursFull ? <span>{hoursFull.toUpperCase()}</span> : null}
-            </div>
-            <div className="scroll-prompt">
-              <span>{discoverLabel}</span>
-              <span className="line"></span>
-            </div>
-          </div>
-        </div>
+      <div className="atelier-hero__content">
+        <p className="atelier-hero__eyebrow">{HERO_EYEBROW}</p>
+        <p className="atelier-hero__mission">
+          {HERO_LINES.map((line, i) => (
+            <span key={i} className="atelier-hero__line">
+              {line.map((token, j) =>
+                token.stress ? (
+                  <span key={j} className="stress">{token.text}</span>
+                ) : (
+                  <span key={j}>{token.text}</span>
+                ),
+              )}
+            </span>
+          ))}
+        </p>
       </div>
     </section>
   )
