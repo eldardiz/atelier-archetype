@@ -1,41 +1,33 @@
 import HeroSection from '@/components/sections/HeroSection'
-import AboutSection from '@/components/sections/AboutSection'
-import EstateSection from '@/components/sections/EstateSection'
-import SustainabilitySection from '@/components/sections/SustainabilitySection'
-import ProductsSection from '@/components/sections/ProductsSection'
-import ContactSection from '@/components/sections/ContactSection'
-import PhotoBreak from '@/components/sections/PhotoBreak'
+import FincaIntroSection from '@/components/sections/FincaIntroSection'
+import ImageStripSection from '@/components/sections/ImageStripSection'
+import OwnerQuoteSection from '@/components/sections/OwnerQuoteSection'
+import DiscoverWinesSection from '@/components/sections/DiscoverWinesSection'
+import WineLinesSection from '@/components/sections/WineLinesSection'
+import TerroirSection from '@/components/sections/TerroirSection'
+import BodegaSection from '@/components/sections/BodegaSection'
+import WinemakerQuoteSection from '@/components/sections/WinemakerQuoteSection'
+import NewsletterSection from '@/components/sections/NewsletterSection'
 import Footer from '@/components/layout/Footer'
 
-// LEA Winery rhythm — alternating text + photo:
-//   Hero          (full-bleed photo + italic-stress mission)
-//   Chi siamo     (centered text block)
-//   PhotoBreak    (family / vineyard photo, full-bleed)
-//   Tenuta        (centered text block)
-//   PhotoBreak    (estate / building photo, full-bleed)
-//   Sostenibilità (centered text block)
-//   PhotoBreak    (aerial / sustainability photo, full-bleed)
-//   I Vini        (intro headline + brand-name marquee + stacked wine rows)
-//   Contatti      (centered minimal)
-//   Footer
+// Sesta Laioles homepage flow:
+//   Hero → Finca intro → Image strip → Owner quote → Discover wines →
+//   Wine lines (Terroir + Talvi) → Terroir manifesto (full-bleed) →
+//   Bodega split → Winemaker quote → Newsletter → Footer
 
 export default function HomePage() {
   return (
     <main className="page">
       <HeroSection />
-
-      <AboutSection />
-      <PhotoBreak src="/images/about/placeholder.jpg" />
-
-      <EstateSection />
-      <PhotoBreak src="/images/location/placeholder.jpg" />
-
-      <SustainabilitySection />
-      <PhotoBreak src="/images/cta/placeholder.jpg" />
-
-      <ProductsSection />
-
-      <ContactSection />
+      <FincaIntroSection />
+      <ImageStripSection />
+      <OwnerQuoteSection />
+      <DiscoverWinesSection />
+      <WineLinesSection />
+      <TerroirSection />
+      <BodegaSection />
+      <WinemakerQuoteSection />
+      <NewsletterSection />
       <Footer />
     </main>
   )

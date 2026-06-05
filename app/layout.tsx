@@ -1,38 +1,29 @@
 import type { Metadata } from "next";
-import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/components/providers/LenisProvider";
 import AnimationInit from "@/components/providers/AnimationInit";
 import Navbar from "@/components/layout/Navbar";
 import { brand } from "@/lib/brand";
 
-// Atelier type system — Inter for the restrained sans body / UI / nav, and
-// Fraunces in italic for stress moments inside headlines (e.g. the LEA Winery
-// "rispetto" / "dedizione" pattern, italicized Latin words inside a sans run).
-// Both are free Google Fonts and share enough x-height to mix without
-// awkward baseline shifts.
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-});
+// Atelier (Sesta Laioles reference). Two free Google Fonts:
+// - Cormorant Garamond — high-contrast elegant serif with characterful italic.
+//   Used for ALL display headlines (italic for most, roman for the small
+//   "Terroir Line" / "Talvi Line" labels). Captures Sesta's signature look.
+// - Inter — clean sans, used for body, eyebrow labels, nav, and buttons.
 
-// Instrument Serif — high-contrast serif with characterful italic, closer to
-// LEA Winery's actual italic-stress font than Fraunces. Used exclusively for
-// stress words inside otherwise-sans headlines via the .stress class.
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["300", "400", "500", "600"],
   style: ["normal", "italic"],
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-mono-var",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["300", "400", "500", "600"],
   display: "swap",
 });
 
@@ -55,7 +46,7 @@ export const metadata: Metadata = {
     locale: LOCALE_OG_MAP[brand.identity.locale],
     type: "website",
   },
-}
+};
 
 export default function RootLayout({
   children,
@@ -65,40 +56,9 @@ export default function RootLayout({
   return (
     <html
       lang={brand.identity.locale}
-      className={`${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
+      className={`${cormorant.variable} ${inter.variable}`}
     >
       <body className="antialiased">
-        {/* Global SVG noise filter — referenced by all .noise elements */}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          style={{ position: "absolute", width: 0, height: 0, overflow: "hidden" }}
-          aria-hidden="true"
-        >
-          <defs>
-            <filter id="noise" x="0" y="0" width="100%" height="100%">
-              <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" />
-              <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0" />
-            </filter>
-          </defs>
-        </svg>
-
-        {/* Cursor marquee (Osmo Supply) */}
-        <div data-cursor-marquee-status="" className="cursor-marquee">
-          <div className="cursor-marquee__card">
-            <span data-cursor-marquee-text-target="" className="cursor-marquee__text-span">View gallery</span>
-            <span data-cursor-marquee-text-target="" className="cursor-marquee__text-span is--duplicate">View gallery</span>
-          </div>
-        </div>
-
-        {/* Progressive blur bottom edge (Osmo Supply) */}
-        <div className="progressive-blur" aria-hidden="true">
-          <div className="progressive-blur__layer is--1"></div>
-          <div className="progressive-blur__layer is--2"></div>
-          <div className="progressive-blur__layer is--3"></div>
-          <div className="progressive-blur__layer is--4"></div>
-          <div className="progressive-blur__layer is--5"></div>
-        </div>
-
         <LenisProvider>
           <Navbar />
           <AnimationInit />

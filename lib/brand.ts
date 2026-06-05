@@ -23,10 +23,11 @@ export const brand = {
   // These fields drive conditional copy/sections/styling across the template.
   businessType: "restaurant" as "restaurant" | "winery" | "bakery",
   archetype: "atelier" as "editorial" | "maison" | "atelier",
-  // Atelier has no dark/light theme variant. The whole archetype is built
-  // on paper-white surfaces with forest-green as the single accent. Field
-  // kept for brand.ts interface parity with the Editorial archetype.
-  theme: "light" as "dark" | "light",
+  // Theme variant for Editorial — flips dark surfaces to white via the
+  // [data-theme="light"] CSS overlay in styles/claude-design.css. Set to
+  // 'light' for bakeries / juice bars / brunch leads where a bright canvas
+  // suits the brand better. Default 'dark' (atmospheric, photo-led).
+  theme: "dark" as "dark" | "light",
 
   // ── Contact ─────────────────────────────────────────────────────────────────
   contact: {

@@ -1,94 +1,66 @@
 /* ──────────────────────────────────────────────────────────────────────────
- * Atelier archetype — design tokens
+ * Atelier archetype — design tokens (Sesta Laioles reference)
  *
- * Atelier is the third Axamo archetype, structurally distinct from Editorial
- * and Fresh. It is built for natural-wine producers, third-wave bakeries, and
- * designer-led restaurants. Reference: leawinery.com (palette + italic-stress
- * type pattern). Mood: editorial, monochromatic, austere, photography-led.
+ * Mood: refined, heritage Mediterranean, monochrome-with-photography.
+ * Background is a single warm cream that runs through every text section.
+ * Photos do all the color work. No bright accent.
  *
- * What to swap when spawning a new site from this archetype:
- *   1. The accent — `--color-primary` is forest green by default; the natural
- *      Atelier vibe also accommodates oxblood, terracotta, midnight, or warm
- *      ochre. Swap and the whole archetype reskins.
- *   2. Maybe the warm tertiary `--color-accent` — leave at terracotta for
- *      pairings with green/oxblood; lift to a deeper ink (#3D2914) for
- *      monochrome-only leads.
- *   3. Surfaces stay paper-white. Do not introduce a dark theme; Atelier's
- *      identity is the bright, restrained canvas.
- *   4. Optionally fonts — but Inter + Fraunces is the locked default. If a
- *      lead requires paid typefaces (FS Siena, GT America, Söhne) handle
- *      licensing separately and update brand.ts notes.
- *
- * Defaults below are derived from leawinery.com via HUE.
+ * Defaults below are extracted from sestalaioles.com.
+ * Replace per-project — but keep the warm-cream identity intact; if the
+ * lead's brand calls for a different surface tone, swap the cream value
+ * only, not the structure.
  * ────────────────────────────────────────────────────────────────────────── */
 
 :root {
   /* ── Brand colors ────────────────────────────────────────────────────── */
-  /* Primary accent — forest green. Used on hover states, link underlines,
-     small accent moments, and the rare CTA button surface. Never floods. */
-  --color-primary: #264C41;
-  --color-primary-dark: #1A3530;
-  --color-primary-soft: rgba(38, 76, 65, 0.12);
 
-  /* Page backgrounds. --color-bg is the dominant paper white;
-     --color-bg-alt alternates section rhythm with a faint cream;
-     --color-bg-dark is reserved for the rare full-bleed photo gradient sites
-     (final CTA, hero overlay). Atelier does not use dark body sections. */
-  --color-bg: #FFFDF5;
-  --color-bg-alt: #F0EEE6;
-  --color-bg-dark: #141414;
+  /* Page surface — warm Mediterranean cream. The dominant color. */
+  --color-bg: #F0EAD8;
+  --color-bg-alt: #E8E0CC;       /* slightly deeper cream for section rhythm */
+  --color-bg-dark: #181613;      /* near-black for the rare dark photo overlay */
 
-  /* Text. --color-text is near-black on the paper surface;
-     --color-text-light is paper for use on dark photographic overlays;
-     --color-text-muted is the secondary, lower-emphasis tier. */
-  --color-text: #141414;
-  --color-text-light: #FFFDF5;
-  --color-text-muted: #6E6E6A;
+  /* Newsletter / heavy footer surface — dusty olive-brown. Sesta's signature
+     deeper surface, used once at the bottom of the page for contrast. */
+  --color-bg-warm: #9F8C70;
 
-  /* Warm tertiary — terracotta brick. Used very sparingly: small dots,
-     section number prefixes, the occasional hover halo. Never the dominant
-     accent (that's --color-primary). */
-  --color-accent: #864928;
-  --color-accent-dark: #5F331B;
+  /* Ink */
+  --color-text: #181613;          /* near-black headlines + body */
+  --color-text-light: #F5EFDF;    /* paper text on warm or dark surfaces */
+  --color-text-muted: #6E6856;    /* eyebrow labels, attribution captions */
 
-  /* Borders — keep these as rgba of --color-text so they re-tint when the
-     palette changes. */
-  --color-border: rgba(20, 20, 20, 0.10);
-  --color-border-strong: rgba(20, 20, 20, 0.20);
-  --color-border-light: rgba(255, 253, 245, 0.20);
+  /* Accents kept neutral — Sesta has no real accent color, the design relies
+     on photography. These two stay for hover/focus states only. */
+  --color-primary: #181613;       /* maps to ink — buttons are outlined, no fill */
+  --color-primary-dark: #000000;
+  --color-accent: #6E6856;        /* terracotta-grey, used very rarely */
+  --color-accent-dark: #4A4538;
+
+  /* Borders */
+  --color-border: rgba(24, 22, 19, 0.14);
+  --color-border-strong: rgba(24, 22, 19, 0.32);
+  --color-border-light: rgba(245, 239, 223, 0.20);
 
   /* ── Typography ──────────────────────────────────────────────────────── */
-  /* Font variables are bound to next/font CSS variables in app/layout.tsx.
-     Atelier uses Inter as the workhorse for body, UI, nav, and most headlines,
-     paired with Fraunces in italic for stress moments (italicized Latin or
-     emphasis words inside a sans run — see the .stress class in
-     claude-design.css). */
-  --font-heading: var(--font-inter);
-  --font-body: var(--font-inter);
-  --font-stress: var(--font-fraunces);
+  --font-heading: var(--font-cormorant);   /* italic + roman for display moments */
+  --font-body: var(--font-inter);           /* sans for body / nav / buttons */
 
-  /* Tracking presets — Atelier headlines are tighter than Editorial's.
-     -tracking-caps stays loose for the small all-caps eyebrow labels. */
-  --tracking-heading: -0.04em;
-  --tracking-display: -0.06em;
-  --tracking-caps: 0.16em;
+  --tracking-heading: -0.015em;
+  --tracking-display: -0.02em;
+  --tracking-caps: 0.18em;
 
-  /* ── Spacing scale ───────────────────────────────────────────────────── */
-  /* Atelier breathes more than Editorial. Section padding scales up; gutters
-     stay generous; the 12-col grid uses a 24-32px base unit. */
-  --space-section: 160px;
-  --space-section-sm: 96px;
-  --space-section-xs: 56px;
+  /* ── Spacing ─────────────────────────────────────────────────────────── */
+  --space-section: 140px;
+  --space-section-sm: 88px;
+  --space-section-xs: 48px;
   --gutter: clamp(20px, 4vw, 64px);
+  --max: 1320px;
 
   /* ── Radius ──────────────────────────────────────────────────────────── */
-  /* Atelier is intentionally low-radius (sharp, magazine-like). */
-  --radius-card: 4px;
-  --radius-btn: 2px;
-  --radius-pill: 999px;   /* reserved for tiny eyebrow tags only */
+  /* Sesta buttons are pill-shaped. Cards are clean rectangles with no radius. */
+  --radius-card: 0;
+  --radius-btn: 999px;
 
   /* ── Motion ──────────────────────────────────────────────────────────── */
-  /* GSAP scroll reveals and Lenis smooth-scroll inherit these defaults. */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-expo: cubic-bezier(0.7, 0, 0.84, 0);
   --duration-default: 0.6s;

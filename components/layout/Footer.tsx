@@ -1,49 +1,49 @@
-import Link from 'next/link'
 import { brand } from '@/lib/brand'
 
-// LEA footer pattern:
-// - Top: centered logo wordmark large + tagline "Innovative to be natural"
-// - Middle: repeated nav links inline + language switcher
-// - Bottom: thin row with copyright + legal link + agency credit
-// All paper-on-paper. No CTA, no big imagery, no newsletter form.
+// Sesta footer — slice 08 bottom.
+// Three text columns (Press/Legal links + Contact + socials) and a monogram on the right.
 
-const FOOT_NAV = [
-  { label: 'Chi siamo', href: '#about' },
-  { label: 'Tenuta', href: '#estate' },
-  { label: 'I vini', href: '#products' },
-  { label: 'Sostenibilità', href: '#sustainability' },
-  { label: 'Contatti', href: '#contact' },
-] as const
+const LEGAL = ['Press', 'Terms & Conditions', 'Privacy Policy', 'Imprint'] as const
 
 export default function Footer() {
   const name: string = brand.identity.name
+  const email: string = brand.contact.email || 'info@example.com'
+  const monogram = (name?.[0] ?? 'S').toUpperCase() + (name?.[1] ?? 'T').toUpperCase()
   const year = 2026
 
   return (
-    <footer className="atelier-footer">
-      <div className="atelier-footer__top">
-        <p className="atelier-footer__tagline">Innovative to be natural</p>
-        <Link href="#hero" className="atelier-footer__brand" aria-label={name}>
-          {name}
-        </Link>
-      </div>
+    <footer className="sesta-footer">
+      <div className="sesta-footer__inner">
+        <div className="sesta-footer__col">
+          {LEGAL.map((l) => (
+            <a key={l} href="#">
+              {l}
+            </a>
+          ))}
+        </div>
 
-      <nav className="atelier-footer__nav" aria-label="Footer">
-        {FOOT_NAV.map((item) => (
-          <a key={item.label} href={item.href}>
-            {item.label}
-          </a>
-        ))}
-      </nav>
+        <div className="sesta-footer__col">
+          <p className="sesta-footer__heading">Contact</p>
+          <a href={`mailto:${email}`}>{email}</a>
+          <div className="sesta-footer__socials">
+            <a href={brand.social.instagramUrl || '#'} aria-label="Instagram">
+              IG
+            </a>
+            <a href={brand.social.facebook || '#'} aria-label="Facebook">
+              FB
+            </a>
+          </div>
+        </div>
 
-      <div className="atelier-footer__legal">
-        <span>
-          © {year} {name}. All rights reserved.
-        </span>
-        <span className="atelier-footer__sep" aria-hidden="true">·</span>
-        <Link href="/mentions-legales">Legal</Link>
-        <span className="atelier-footer__sep" aria-hidden="true">·</span>
-        <span>Site by Softbird</span>
+        <div className="sesta-footer__col">
+          {/* spacer / future address column */}
+        </div>
+
+        <div className="sesta-footer__mono" aria-hidden="true">
+          {monogram}
+        </div>
+
+        <p className="sesta-footer__copyright">© {year} {name}</p>
       </div>
     </footer>
   )
