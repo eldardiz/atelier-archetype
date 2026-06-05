@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { PHOTOS } from '@/lib/placeholders'
 
 // Sesta "The Bodega / Tradition meets innovation" — slice 06.
 // Split: left text (eyebrow + display + body + button), right wine-cellar photo.
@@ -23,7 +24,7 @@ export default function BodegaSection() {
         </div>
         <div className="sesta-bodega__photo" aria-hidden="true">
           <Image
-            src="/images/featured/card-02.jpg"
+            src={PHOTOS.bodega}
             alt=""
             fill
             sizes="(max-width: 900px) 100vw, 50vw"

@@ -212,7 +212,13 @@ input, textarea { font: inherit; color: inherit; }
   overflow: hidden;
   color: var(--color-bg);
 }
-.sesta-hero__bg { position: absolute; inset: 0; z-index: 1; }
+.sesta-hero__bg {
+  position: absolute;
+  /* extra room top + bottom so the parallax yPercent translation never
+     reveals an empty edge on the section */
+  top: -12%; left: 0; right: 0; bottom: -12%;
+  z-index: 1;
+}
 .sesta-hero__bg img { object-fit: cover; }
 .sesta-hero__veil {
   position: absolute; inset: 0; z-index: 2;
@@ -496,7 +502,11 @@ input, textarea { font: inherit; color: inherit; }
   color: var(--color-bg);
   overflow: hidden;
 }
-.sesta-terroir__bg { position: absolute; inset: 0; z-index: 1; }
+.sesta-terroir__bg {
+  position: absolute;
+  top: -15%; left: 0; right: 0; bottom: -15%;
+  z-index: 1;
+}
 .sesta-terroir__bg img { object-fit: cover; }
 .sesta-terroir__veil {
   position: absolute; inset: 0; z-index: 2;

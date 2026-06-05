@@ -1,18 +1,65 @@
+'use client'
+
 import Image from 'next/image'
+import { useEffect, useRef } from 'react'
+import { PHOTOS } from '@/lib/placeholders'
 
-// Sesta Laioles hero — slice 00.
-// Full-bleed historic tower / vineyard photo.
-// Italic Cormorant Garamond display headline bottom-left, two lines max.
-// Small circular scroll-down arrow below the headline.
-
-const HERO_IMG = '/images/hero/placeholder.jpg'
+// Sesta hero — slice 00.
+// Full-bleed photo. Italic display headline bottom-left. Subtle parallax:
+// the background image translates up slowly as the user scrolls (yPercent
+// 0 → -18) via GSAP ScrollTrigger.
 
 export default function HeroSection() {
+  const sectionRef = useRef<HTMLElement | null>(null)
+  const bgRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    let cleanup = () => {}
+    let cancelled = false
+
+    ;(async () => {
+      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+        import('gsap'),
+        import('gsap/ScrollTrigger'),
+      ])
+      if (cancelled) return
+      gsap.registerPlugin(ScrollTrigger)
+
+      const section = sectionRef.current
+      const bg = bgRef.current
+      if (!section || !bg) return
+
+      const ctx = gsap.context(() => {
+        gsap.fromTo(
+          bg,
+          { yPercent: 0 },
+          {
+            yPercent: -18,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top top',
+              end: 'bottom top',
+              scrub: true,
+            },
+          },
+        )
+      }, section)
+
+      cleanup = () => ctx.revert()
+    })()
+
+    return () => {
+      cancelled = true
+      cleanup()
+    }
+  }, [])
+
   return (
-    <section className="sesta-hero" id="hero">
-      <div className="sesta-hero__bg" aria-hidden="true">
+    <section className="sesta-hero" id="hero" ref={sectionRef}>
+      <div className="sesta-hero__bg" aria-hidden="true" ref={bgRef}>
         <Image
-          src={HERO_IMG}
+          src={PHOTOS.hero}
           alt=""
           fill
           priority

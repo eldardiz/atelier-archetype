@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { PHOTOS } from '@/lib/placeholders'
 
 // Sesta winemaker quote — slice 07.
 // Left: harvest photo. Right: italic pull quote + attribution.
@@ -9,7 +10,7 @@ export default function WinemakerQuoteSection() {
       <div className="sesta-wm-quote__inner">
         <div className="sesta-wm-quote__photo" aria-hidden="true">
           <Image
-            src="/images/featured/card-03.jpg"
+            src={PHOTOS.winemaker}
             alt=""
             fill
             sizes="(max-width: 900px) 100vw, 50vw"

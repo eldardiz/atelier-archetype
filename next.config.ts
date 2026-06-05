@@ -6,6 +6,11 @@ const nextConfig: NextConfig = {
     root: path.join(__dirname),
   },
   transpilePackages: ["lenis", "gsap"],
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com" },
+    ],
+  },
 };
 
 export default nextConfig;

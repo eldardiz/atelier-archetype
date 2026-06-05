@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { PHOTOS } from '@/lib/placeholders'
 
 // Sesta "The Finca" — slice 01.
 // Two-column head (left: eyebrow + display headline / right: body + button)
@@ -26,10 +27,10 @@ export default function FincaIntroSection() {
 
       <div className="sesta-finca__photos">
         <div className="sesta-finca__photo sesta-finca__photo--sm" aria-hidden="true">
-          <Image src="/images/about/placeholder.jpg" alt="" fill sizes="280px" className="object-cover" />
+          <Image src={PHOTOS.fincaSm} alt="" fill sizes="280px" className="object-cover" />
         </div>
         <div className="sesta-finca__photo" aria-hidden="true">
-          <Image src="/images/featured/card-01.jpg" alt="" fill sizes="(max-width: 900px) 100vw, 60vw" className="object-cover" />
+          <Image src={PHOTOS.fincaWide} alt="" fill sizes="(max-width: 900px) 100vw, 60vw" className="object-cover" />
         </div>
       </div>
     </section>

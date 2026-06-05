@@ -1,15 +1,64 @@
+'use client'
+
 import Image from 'next/image'
+import { useEffect, useRef } from 'react'
+import { PHOTOS } from '@/lib/placeholders'
 
 // Sesta "The Terroir / In harmony with nature" — slice 05.
-// Full-bleed sunset vineyard photo with a left-to-right dark gradient.
-// Two-column inner: left = eyebrow + display, right = body + button.
+// Full-bleed sunset vineyard photo with left-to-right dark gradient.
+// Subtle parallax on the background (yPercent 8 → -8 across scroll).
 
 export default function TerroirSection() {
+  const sectionRef = useRef<HTMLElement | null>(null)
+  const bgRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    let cleanup = () => {}
+    let cancelled = false
+
+    ;(async () => {
+      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+        import('gsap'),
+        import('gsap/ScrollTrigger'),
+      ])
+      if (cancelled) return
+      gsap.registerPlugin(ScrollTrigger)
+
+      const section = sectionRef.current
+      const bg = bgRef.current
+      if (!section || !bg) return
+
+      const ctx = gsap.context(() => {
+        gsap.fromTo(
+          bg,
+          { yPercent: 10 },
+          {
+            yPercent: -10,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true,
+            },
+          },
+        )
+      }, section)
+
+      cleanup = () => ctx.revert()
+    })()
+
+    return () => {
+      cancelled = true
+      cleanup()
+    }
+  }, [])
+
   return (
-    <section className="sesta-terroir" id="terroir">
-      <div className="sesta-terroir__bg" aria-hidden="true">
+    <section className="sesta-terroir" id="terroir" ref={sectionRef}>
+      <div className="sesta-terroir__bg" aria-hidden="true" ref={bgRef}>
         <Image
-          src="/images/featured/card-04.jpg"
+          src={PHOTOS.terroir}
           alt=""
           fill
           sizes="100vw"
