@@ -1,35 +1,36 @@
 /**
- * Stock Unsplash photos for the Sesta Laioles archetype template.
- * Vibe: warm Mediterranean / golden-hour vineyard / stone / oak barrel.
+ * Stock photos for the Sesta Laioles archetype template.
+ * Vibe: warm Mediterranean / golden-hour vineyard / Mallorca finca / oak barrel.
+ * Source: Pexels (CC0, no attribution required).
  *
  * Per-lead workflow: replace these URLs with `/images/...` local files when
- * the lead's photo folder is ready. The Atelier archetype expects 7 distinct
+ * the lead's photo folder is ready. The Atelier archetype expects 9 distinct
  * image slots across the homepage.
  */
 
-const u = (id: string, w = 1800, q = 80) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=${q}`
+const pex = (id: string, w = 1800, q = 80) =>
+  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&fit=crop&w=${w}&q=${q}`
 
 export const PHOTOS = {
-  // Hero — full-bleed vineyard with hillside / golden hour
-  hero: u('1474722883634-bcefb1a92f6f', 2400),
+  // Hero — full-bleed Tuscan vineyard at golden hour
+  hero: pex('14515698', 2400),
 
-  // Finca intro — small square (stone wall texture / interior detail)
-  fincaSm: u('1568213816046-0ee1c42bd559', 800),
-  // Finca intro — wide vineyard or estate photo
-  fincaWide: u('1506377247377-2a5b3b417ebb', 1800),
+  // Finca intro — small square (Sicily vineyard hillside)
+  fincaSm: pex('36338455', 900),
+  // Finca intro — wide (Mallorca / Sóller stone finca against Tramuntana)
+  fincaWide: pex('33189514', 1800),
 
-  // Image strip — 3 photos
-  strip1: u('1547595858-d4dcfa9cd8c8', 800),
-  strip2: u('1518972559570-7cc1309f3229', 1800),
-  strip3: u('1496318447583-f524534e9ce1', 800),
+  // Image strip — 3 photos (vineyard detail, harvest hands, grape bin)
+  strip1: pex('6492359', 900),
+  strip2: pex('10923023', 1800),
+  strip3: pex('32618106', 900),
 
-  // Terroir — full-bleed sunset vineyard / Mediterranean landscape
-  terroir: u('1559672266-ec0bd2cbf8a8', 2400),
+  // Terroir — full-bleed sunset vineyard rows (Alsace golden hour)
+  terroir: pex('18248851', 2400),
 
-  // Bodega — wine cellar / oak barrels
-  bodega: u('1568213816046-0ee1c42bd559', 1600),
+  // Bodega — oak barrels in stone cellar
+  bodega: pex('16068126', 1600),
 
-  // Winemaker quote — harvest scene / hands at work in the vines
-  winemaker: u('1547595858-d4dcfa9cd8c8', 1400),
+  // Winemaker quote — wine pour into glass (intimate, premium)
+  winemaker: pex('29436323', 1400),
 } as const

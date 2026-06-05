@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
+import { PHOTOS } from '@/lib/placeholders'
 
 declare global {
   interface Window {
@@ -105,7 +106,7 @@ export default function Preloader() {
   return (
     <div className="preloader" ref={rootRef}>
       <div className="preloader-bg" aria-hidden="true">
-        <Image src="/images/ambiance/storefront.jpg" alt="" fill className="object-cover" priority sizes="100vw" />
+        <Image src={PHOTOS.hero} alt="" fill className="object-cover" priority sizes="100vw" />
       </div>
       <div className="preloader-mask" ref={maskRef}></div>
       <div className="preloader-content" ref={contentRef}>

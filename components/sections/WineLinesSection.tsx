@@ -1,14 +1,12 @@
 // Sesta "The Wines" — slice 04.
 // Two columns split by a vertical hairline. Each column = pager count
-// ("01 / 02"), big italic name ("The Terroir Line"), body, and a faded
-// bottle PNG hint at the bottom with a pager strip.
+// ("01 / 02"), big italic name ("The Terroir Line"), body, pager strip.
 
 type WineLine = {
   id: string
   count: string
   name: { italic: string; roman: string }
   body: string
-  bottleSrc?: string
   paging: { current: number; total: number }
 }
 
@@ -19,7 +17,6 @@ const LINES: WineLine[] = [
     name: { italic: 'The', roman: 'Terroir Line' },
     body:
       'Minerality, profundity, and structure characterise the three wines of the Terroir line. Intense aromas of black-red berries dominate the bouquet.',
-    bottleSrc: '/images/showcase/panel-01.png',
     paging: { current: 1, total: 3 },
   },
   {
@@ -28,7 +25,6 @@ const LINES: WineLine[] = [
     name: { italic: 'The', roman: 'Talvi Line' },
     body:
       'Aromatic, fresh, and elegantly structured, the Talvi line carries the sun-soaked finesse of the Mediterranean into the glass.',
-    bottleSrc: '/images/showcase/panel-02.png',
     paging: { current: 1, total: 3 },
   },
 ]
@@ -49,13 +45,6 @@ export default function WineLinesSection() {
               {line.name.italic} <span className="roman">{line.name.roman}</span>
             </h2>
             <p className="sesta-wines__body">{line.body}</p>
-
-            {line.bottleSrc ? (
-              <div className="sesta-wines__bottle" aria-hidden="true">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={line.bottleSrc} alt="" />
-              </div>
-            ) : null}
 
             <div className="sesta-wines__pager">
               {Array.from({ length: line.paging.total }).map((_, i) => (
