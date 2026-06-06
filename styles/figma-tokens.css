@@ -27,6 +27,7 @@
   --color-text: #181613;          /* near-black headlines + body */
   --color-text-light: #F5EFDF;    /* paper text on warm or dark surfaces */
   --color-text-muted: #6E6856;    /* eyebrow labels, attribution captions */
+  --color-on-photo: #FFFFFF;      /* pure white — only for text overlaid on full-bleed photos */
 
   /* Accents kept neutral — Sesta has no real accent color, the design relies
      on photography. These two stay for hover/focus states only. */

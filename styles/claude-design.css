@@ -210,7 +210,7 @@ input, textarea { font: inherit; color: inherit; }
   height: 100vh;
   min-height: 720px;
   overflow: hidden;
-  color: var(--color-bg);
+  color: var(--color-on-photo);
 }
 .sesta-hero__bg {
   position: absolute;
@@ -222,7 +222,7 @@ input, textarea { font: inherit; color: inherit; }
 .sesta-hero__bg img { object-fit: cover; }
 .sesta-hero__veil {
   position: absolute; inset: 0; z-index: 2;
-  background: linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.0) 35%, rgba(0,0,0,0.45) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.05) 35%, rgba(0,0,0,0.7) 100%);
 }
 .sesta-hero__inner {
   position: absolute; inset: 0; z-index: 3;
@@ -238,7 +238,8 @@ input, textarea { font: inherit; color: inherit; }
   font-size: clamp(48px, 7vw, 92px);
   line-height: 1.02;
   letter-spacing: -0.02em;
-  color: var(--color-bg);
+  color: var(--color-on-photo);
+  text-shadow: 0 1px 24px rgba(0, 0, 0, 0.35);
   margin: 0 0 32px;
   max-width: 14ch;
 }
@@ -248,12 +249,12 @@ input, textarea { font: inherit; color: inherit; }
   width: 44px; height: 44px;
   border: 1px solid currentColor;
   border-radius: 50%;
-  color: var(--color-bg);
+  color: var(--color-on-photo);
   font-size: 16px;
   background: transparent;
   transition: background 0.25s ease, color 0.25s ease;
 }
-.sesta-hero__scroll:hover { background: var(--color-bg); color: var(--color-text); }
+.sesta-hero__scroll:hover { background: var(--color-on-photo); color: var(--color-text); }
 
 /* ─────────────────────────────────────────────────────────────────────────
    FINCA INTRO — eyebrow + display + 2-col body + button + photo pair
@@ -499,9 +500,10 @@ input, textarea { font: inherit; color: inherit; }
   position: relative;
   width: 100%;
   min-height: 580px;
-  color: var(--color-bg);
+  color: var(--color-on-photo);
   overflow: hidden;
 }
+.sesta-terroir .sesta-eyebrow { color: var(--color-on-photo); opacity: 0.85; }
 .sesta-terroir__bg {
   position: absolute;
   top: -15%; left: 0; right: 0; bottom: -15%;
@@ -510,7 +512,7 @@ input, textarea { font: inherit; color: inherit; }
 .sesta-terroir__bg img { object-fit: cover; }
 .sesta-terroir__veil {
   position: absolute; inset: 0; z-index: 2;
-  background: linear-gradient(90deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.12) 65%, rgba(0,0,0,0) 100%);
+  background: linear-gradient(90deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.15) 100%);
 }
 .sesta-terroir__inner {
   position: relative; z-index: 3;
@@ -530,6 +532,8 @@ input, textarea { font: inherit; color: inherit; }
   font-size: clamp(40px, 5.4vw, 76px);
   line-height: 1.04;
   letter-spacing: -0.02em;
+  color: var(--color-on-photo);
+  text-shadow: 0 1px 24px rgba(0, 0, 0, 0.35);
   margin: 0;
   max-width: 12ch;
 }
@@ -539,15 +543,16 @@ input, textarea { font: inherit; color: inherit; }
   font-weight: 400;
   font-size: 15px;
   line-height: 1.65;
+  color: var(--color-on-photo);
   max-width: 42ch;
 }
 .sesta-terroir__btn {
   background: transparent;
-  color: var(--color-bg);
-  border-color: var(--color-bg);
+  color: var(--color-on-photo);
+  border-color: var(--color-on-photo);
   align-self: flex-start;
 }
-.sesta-terroir__btn:hover { background: var(--color-bg); color: var(--color-text); }
+.sesta-terroir__btn:hover { background: var(--color-on-photo); color: var(--color-text); }
 
 @media (max-width: 900px) {
   .sesta-terroir__inner { grid-template-columns: 1fr; align-items: start; }
